@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<odoo>
+
+    <!--Action to open Doctor view  -->
+    <act_window id="action_department_view" name="Departments" res_model="res.doctor.department" view_mode="tree,form"/>
+    <!-- Menu item to open Doctor view -->
+    <menuitem id="menu_department_view" name="Departments" action="action_department_view" parent="sales_team.menu_sales" />
+
+</odoo>

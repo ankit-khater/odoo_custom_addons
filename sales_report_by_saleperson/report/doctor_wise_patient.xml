@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <report
+                id="action_report_doctor_wise_patient"
+                string="Doctor Wise Patient Report"
+                model="doctor.wise.patient"
+                report_type="qweb-html"
+                file="sales_report_by_saleperson.doctor_wise_patient"
+                name="sales_report_by_saleperson.doctor_wise_patient"
+        />
+</odoo>

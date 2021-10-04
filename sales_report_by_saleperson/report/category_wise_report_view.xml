@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="sale_productcate">
+
+        <xpath expr="." position="inside">
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+                  integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+                  crossorigin="anonymous"/>
+        </xpath>
+
+        <t t-call="report.html_container">
+            <div class="page">
+
+                <center>
+                    <h1>Product Category Wise Collection and Refund Report</h1>
+                </center>
+                <table style="width:100%">
+                    <tr>
+                        <td>
+                            From Date:
+                            <t t-esc="from_date"/>
+                            <br/>
+                            To Date:
+                            <t t-esc="to_date"/>
+                            <br/>
+                        </td>
+                        <td align="right">
+                            <strong>Category:
+                                <t t-esc="category"/>
+                            </strong><br/>
+                            Printing Date:<![CDATA[&nbsp;]]><span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d, %I:%M%p')"/>
+                        </td>
+                    </tr>
+                </table>
+                <br/>
+                <br/>
+                <center>
+                    <h3>Category Wise Collection</h3>
+                </center>
+                <t t-set="s" t-value="0"></t>
+                <table class="table table-condensed" style="border: 1px solid black;">
+                    <thead>
+                        <tr style="border: 1px solid black;">
+                            <th style="border: 1px solid black;">Category Name</th>
+                            <th style="border: 1px solid black;">Product Name</th>
+                            <th style="border: 1px solid black;">Quantity</th>
+                            <th style="border: 1px solid black;">Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="lines" t-as="line">
+                            <td style="border: 1px solid black;">
+                                <span t-esc="line['category']"/>
+                            </td>
+                            <td style="border: 1px solid black;">
+                                <span t-esc="line['name']"/>
+                            </td>
+                            <td style="border: 1px solid black;">
+                                <span t-esc="line['quantity']"/>
+                            </td>
+                            <td style="border: 1px solid black;">
+                                <span t-esc="line['total']"/>
+                                <t t-set="s"  t-value="s+line['total']"></t>
+                            </td>
+                        </tr>
+                        <tr>
+                              <td style="border: 1px solid black;">
+                              </td>
+                              <td style="border: 1px solid black;">
+                              </td>
+                              <td style="border: 1px solid black;">
+                                  <b>Total Collection:</b>
+                              </td>
+                              <td style="border: 1px solid black;">
+                                  <b><span t-esc="s"/></b>
+                              </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br/>
+                <br/>
+                <center>
+                    <h3>Category Wise Refund</h3>
+                </center>
+                <t t-set="r" t-value="0"></t>
+                <table class="table table-condensed" style="border: 1px solid black;">
+                    <thead>
+                        <tr style="border: 1px solid black;">
+                            <th style="border: 1px solid black;">Category Name</th>
+                            <th style="border: 1px solid black;">Product Name</th>
+                            <th style="border: 1px solid black;">Quantity</th>
+                            <th style="border: 1px solid black;">Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="refund_lines" t-as="line">
+                            <td style="border: 1px solid black;">
+                                <span t-esc="line['category']"/>
+                            </td>
+                            <td style="border: 1px solid black;">
+                                <span t-esc="line['name']"/>
+                            </td>
+                            <td style="border: 1px solid black;">
+                                <span t-esc="line['quantity']"/>
+                            </td>
+                            <td style="border: 1px solid black;">
+                                <span t-esc="line['total']"/>
+                                <t t-set="r"  t-value="r+line['total']"></t>
+                            </td>
+                        </tr>
+                        <tr>
+                              <td style="border: 1px solid black;">
+                              </td>
+                              <td style="border: 1px solid black;">
+                              </td>
+                              <td style="border: 1px solid black;">
+                                  <b>Total Refund:</b>
+                              </td>
+                              <td style="border: 1px solid black;">
+                                  <b><span t-esc="r"/></b>
+                              </td>
+                        </tr>
+                        <tr>
+                              <td style="border: 1px solid black;">
+                              </td>
+                              <td style="border: 1px solid black;">
+                              </td>
+                              <td style="border: 1px solid black;">
+                                  <b>Net Collection:</b>
+                              </td>
+                              <td style="border: 1px solid black;">
+                                  <t t-set="net_amount" t-value="s-r"></t>
+                                  <b><span t-esc="net_amount"/></b>
+                              </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_wizard_datewise_netcollection_report" model="ir.ui.view">
+            <field name="name">datewise.collection.wzd.form.view</field>
+            <field name="model">datewise.collection</field>
+            <field name="arch" type="xml">
+                <form string="Datewise Net Collection Report">
+                    <group>
+                        <group>
+                            <field name="start_date"/>
+                            <field name="user_ids" widget="many2many_tags" />
+                        </group>
+                        <group>
+                            <field name="end_date"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="print_netcollection" string="Print" type="object" class="oe_highlight"/>
+                        Or
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_wizard_datewise_netcollection_report" model="ir.actions.act_window">
+			<field name="name">Datewise Net Collection Report</field>
+			<field name="res_model">datewise.collection</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="view_wizard_datewise_netcollection_report" />
+			<field name="target">new</field>
+		</record>
+
+        <menuitem id="menu_action_wizard_datewise_netcollection_report"
+                  name="Datewise Net Collection Report"
+                  action="action_wizard_datewise_netcollection_report"
+                  parent="sales_team.menu_sale_report"
+                  sequence="12"/>
+    </data>
+</odoo>

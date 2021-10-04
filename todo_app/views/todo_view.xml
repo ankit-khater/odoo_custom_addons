@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<odoo>
+   <!-- Form View-->
+   <record id="view_form_todo_task" model="ir.ui.view">
+        <field name="name">To-Do Task Form </field>
+        <field name="model">todo.task</field>
+        <field name="arch" type="xml">
+            <form string="To-Do Task">
+                <header>
+                    <button name="do_toggle_done" type="object" string="Toggle Done" class="oe_highlight"/>
+                    <button name="do_clear_done" type="object" string="Clear all Done"/>
+                </header>
+                <sheet>
+                        <group name="group_top">
+                                <group name="group_left">
+                                        <field name="name"/>
+                                </group>
+                                <group name="group_right">
+                                        <field name="is_done"/>
+                                        <field name="active" readonly="1"/>
+                                </group>
+                        </group>
+                </sheet>
+
+            </form>
+        </field>
+   </record>
+    <!--Tree View-->
+    <record id="view_tree_todo_tsk" model="ir.ui.view">
+        <field name="name">To-Do Task Tree</field>
+        <field name="model">todo.task</field>
+        <field name="arch" type="xml">
+            <tree colors="decoration-muted:is_done==True">
+                <field name="name"/>
+                <field name="is_done"/>
+            </tree>
+        </field>
+
+    </record>
+
+    <record id="view_filter_todo_task" model="ir.ui.view">
+        <field name="name">To-Do Task Filter</field>
+        <field name="model">todo.task</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <filter String="Not Done" domain="[('is_done','=',False)]"/>
+                <filter String="Done" domain="[('is_done','!=',False)]"/>
+            </search>
+        </field>
+    </record>
+</odoo>

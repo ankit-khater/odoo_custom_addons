@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <report
+                id="action_report_sales_wise_consultant"
+                string="Consultant Wise Service Report"
+                model="category.wizard.consultant"
+                report_type="qweb-pdf"
+                file="sales_report_by_saleperson.sale_productcate_consultant"
+                name="sales_report_by_saleperson.sale_productcate_consultant"
+        />
+</odoo>

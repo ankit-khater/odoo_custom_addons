@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <report id="report_crm_xlsx"
+                model="account.balance.report"
+                string="Trail Balance Excel"
+                report_type="xlsx"
+                name="account_balance_report.report_account_balance_report.xlsx"
+                file="account_balance_report.report_account_balance_report.xlsx"
+                attachment_use="False"/>
+
+
+        <report id="report_crm_balance_sheet_xlsx"
+                model="accounting.report"
+                string="Balance Sheet Excel"
+                report_type="xlsx"
+                name="accounting_report.report_accounting_report.xlsx"
+                file="accounting_report.report_accounting_report.xlsx"
+                attachment_use="False"/>
+
+</odoo>
+

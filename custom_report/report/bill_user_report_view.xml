@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <template id="single_user_bill_report" name="Hello Report">
+        <xpath expr="." position="inside">
+            <script src="/web/static/lib/jquery/jquery.js"></script>
+        </xpath>
+        <t t-call="report.html_container">
+            <div>
+                <div id="printSection">
+                    <script>
+                        jQuery(document).ready(function(){
+
+                        jQuery(".printDivSec").click(function() {
+                        jQuery(".printDivSec").css("display","none");
+                        jQuery("._close").css("display","none");
+                        var printer = window.open('left=0', 'top=0', 'width=300,height=300');
+                        printer.document.open("text/html");
+                        printer.document.write(document.getElementById('printSection').innerHTML);
+                        printer.print();
+                        printer.document.close();
+                        printer.window.close();
+                        jQuery(".printDivSec").css("display","");
+                        jQuery("._close").css("display","");
+                        });
+
+                        jQuery("._close").click(function() {
+                        window.close();
+                        });
+                        });
+
+                    </script>
+
+                    <button type="button" class="btn btn-success btn-sm printDivSec">Print</button>
+                    <button type="button" class="btn btn-info btn-sm _close">Close</button>
+                    <div class="header">
+                        <div class="row">
+                            <div class="col-xs-10 text-right">
+                                <img src='/custom_report/static/src/image/banner.jpg'/>
+                            </div>
+                        </div>
+                    </div>
+                    <style>
+                        table.kha1 {
+                        font-family:arial;
+                        background-color: #000000;
+                        border:1px solid;
+                        font-size: 14px;
+                        width: 100%;
+                        text-align: left;
+                        table-layout:fixed;
+                        }
+                        table.kha1 tbody td {
+                        color: #3D3D3D;
+                        padding: 4px;
+                        background-color: #FFF;
+                        vertical-align: top;
+                        word-wrap:break-word;
+                        }
+                        table.kha1 tbody tr td{
+                        border :1pt solid #000000;
+                        }
+                        table.kha1 tbody tr.odd td {
+                        background-color:#F0F0F6;
+                        }
+                    </style>
+
+                    <div class="oe_structure"/>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <center>
+                                <b>
+                                    <span>
+                                        <span style="font-size:20px; font-weight:bold">User Wise Daily Bill Collection
+                                            Report
+                                        </span>
+                                        <span>
+<!--                                            <span style="font-size:16px" t-esc="user.name"/>-->
+                                        </span>
+                                    </span>
+                                </b>
+                            </center>
+                        </div>
+                        <div class="col-xs-12">
+                            <center>
+                                <p>
+                                    Date from :
+                                    <span t-esc="start_date"/>
+                                    , Date to :
+                                    <span t-esc="end_date"/>
+                                </p>
+                            </center>
+                        </div>
+                    </div>
+                    <br/>
+
+                    <table class="kha1 table table-condensed" style="border-collapse: collapse; ">
+                        <thead>
+                            <tr style="background:white">
+                                <th style="border: 1px solid black;">User</th>
+                                <th style="border: 1px solid black;">Free Patient</th>
+                                <th style="border: 1px solid black;">Total Patient</th>
+                                <th style="border: 1px solid black;">Total Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="data" t-as="data">
+                                <td style="border: 1px solid black;">
+                                    <span t-esc="data['userName']"/>
+                                </td>
+                                <td style="border: 1px solid black;">
+                                    <span t-esc="data['freePatient']"/>
+                                </td>
+                                <td style="border: 1px solid black;">
+                                    <span t-esc="data['paidPatient']"/>
+                                </td>
+                                <td style="border: 1px solid black;">
+                                    <span t-esc="data['totalCallection']"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

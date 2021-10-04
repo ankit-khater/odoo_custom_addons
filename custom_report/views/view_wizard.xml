@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--        User Wise Daily Bill Collection Report wizard Single -->
+        <record id="custom_bill_report_by_user_single_form_view" model="ir.ui.view">
+            <field name="name">custom.report.info.form.view</field>
+            <field name="model">custom.report.info</field>
+            <field name="arch" type="xml">
+                <form string="Bill Report By User">
+                    <group>
+                        <group>
+                            <field name="start_date"/>
+                            <field name="user_ids" widget="many2many_tags"
+                                   options="{'no_create_edit':True,'no_create':True, 'no_open':True}"/>
+                        </group>
+                        <group>
+                            <field name="end_date"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="bill_report_short" string="View Report" class="oe_highlight"
+                                type="object"/>
+                        Or
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!--        Test Wise Bill Report wizard -->
+        <record id="custom_bill_report_test_wise_form_view" model="ir.ui.view">
+            <field name="name">custom.report.info.form.view</field>
+            <field name="model">custom.report.info</field>
+            <field name="arch" type="xml">
+                <form string="Bill Report By User">
+                    <group>
+                        <group>
+                            <field name="start_date"/>
+                            <field name="user_ids" widget="many2many_tags"
+                                   options="{'no_create_edit':True,'no_create':True, 'no_open':True}"/>
+                        </group>
+                        <group>
+                            <field name="end_date"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="bill_report_det" string="View Report" class="oe_highlight"
+                                type="object"/>
+                        Or
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!--        User Wise Daily Bill Collection Report wizard-->
+        <record id="custom_bill_report_by_user_wise_form_view" model="ir.ui.view">
+            <field name="name">custom.report.info.form.view</field>
+            <field name="model">custom.report.info</field>
+            <field name="arch" type="xml">
+                <form string="User Wise Daily Bill Collection Report wizard">
+                    <group>
+                        <group>
+                            <field name="start_date"/>
+                            <field name="user_ids" widget="many2many_tags"
+                                   options="{'no_create_edit':True,'no_create':True, 'no_open':True}"/>
+                        </group>
+                        <group>
+                            <field name="end_date"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="bill_user_wise_report" string="View Report" class="oe_highlight"
+                                type="object"/>
+                        Or
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="custom_bill_report_by_user_wise_form_view_test" model="ir.ui.view">
+            <field name="name">custom.report.info.form.view</field>
+            <field name="model">custom.report.info</field>
+            <field name="arch" type="xml">
+                <form string="User Wise Daily Bill Collection Report wizard">
+                    <group>
+                        <group>
+                            <field name="start_date"/>
+                            <field name="user_ids" widget="many2many_tags"
+                                   options="{'no_create_edit':True,'no_create':True, 'no_open':True}"/>
+                        </group>
+                        <group>
+                            <field name="end_date"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="bill_user_wise_report" string="View Report" class="oe_highlight"
+                                type="object"/>
+                        Or
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!--Department Wise Collection Wizard -->
+        <record id="department_wise_report_form_view" model="ir.ui.view">
+            <field name="name">custom.report.info.form.view</field>
+            <field name="model">custom.report.info</field>
+            <field name="arch" type="xml">
+                <form string="Department Wise Collection Report wizard">
+                    <group>
+                        <group>
+                            <field name="start_date"/>
+                            <field name="user_ids" widget="many2many_tags"
+                                   options="{'no_create_edit':True,'no_create':True, 'no_open':True}"/>
+                        </group>
+                        <group>
+                            <field name="end_date"/>
+                            <field name="categ_id" filter_domain="[('categ_id', 'child_of', self)]" required="False"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="department_wise_report" string="View Report" class="oe_highlight"
+                                type="object"/>
+                        Or
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!--        <record id="action_bill_user_report_wizard" model="ir.actions.act_window">-->
+        <!--            <field name="name">Bill Report By Bill User (Short)</field>-->
+        <!--            <field name="type">ir.actions.act_window</field>-->
+        <!--            <field name="res_model">custom.report.info</field>-->
+        <!--            <field name="view_id" ref="custom_bill_report_by_user_form_view"/>-->
+        <!--            <field name="target">new</field>-->
+        <!--        </record>-->
+    </data>
+</odoo>

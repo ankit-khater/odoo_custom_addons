@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="doctor_wise_patient">
+        <t t-call="report.html_container">
+            <div class="page">
+                <center>
+                    <h1>Doctor Wise Patient Report</h1>
+                </center>
+                <table style="width:100%">
+                    <tr>
+                        <td>
+                            From Date:
+                            <t t-esc="from_date"/>
+                        </td>
+                        <td align="right">
+                            To Date:
+                            <t t-esc="to_date"/>
+                        </td>
+                        <td align="right">
+                            Printing Date:<![CDATA[&nbsp;]]>
+                            <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d, %H:%M:%S')"/>
+                        </td>
+                    </tr>
+                </table>
+                <br/>
+                <br/>
+                <table class="table table-condensed" style="border: 1px solid black;">
+                    <thead>
+                        <tr style="border: 1px solid black;">
+                            <th style="border: 1px solid black;">S/N</th>
+                            <th style="border: 1px solid black;">Doctor Name</th>
+                            <th style="border: 1px solid black;">Number of Patients</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="data" t-as="data">
+                            <td style="border: 1px solid black;">
+                                <span t-esc="data_index+1"/>
+                            </td>
+
+                            <td style="border: 1px solid black;">
+                                <span t-esc="data['name']"/>
+                            </td>
+
+                            <td style="border: 1px solid black;">
+                                <span t-esc="data['patient']"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </template>
+</odoo>

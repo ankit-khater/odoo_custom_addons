@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <report
+                id="action_report_sales_wise"
+                string="Category Wise Report"
+                model="category.wizard"
+                report_type="qweb-html"
+                file="sales_report_by_saleperson.sale_productcate"
+                name="sales_report_by_saleperson.sale_productcate"
+        />
+</odoo>

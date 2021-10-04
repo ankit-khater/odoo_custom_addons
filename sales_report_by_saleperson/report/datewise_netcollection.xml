@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <report
+                id="action_datewise_netcollection_report"
+                string="Datewise Net Collection Report"
+                model="datewise.collection"
+                report_type="qweb-pdf"
+                file="sales_report_by_saleperson.datewise_netcollection_report"
+                name="sales_report_by_saleperson.datewise_netcollection_report"
+        />
+</odoo>

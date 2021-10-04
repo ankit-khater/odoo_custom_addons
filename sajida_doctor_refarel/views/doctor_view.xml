@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<odoo>
+<!--Doctor Form View -->
+     <record id="view_form_doctor" model="ir.ui.view">
+        <field name="name">Doctor View</field>
+        <field name="model">res.doctor</field>
+        <field name="arch" type="xml">
+            <form string="Doctor View">
+                <sheet>
+                    <group name="group_top">
+                        <group name="group_left">
+                            <field name="name_provider"/>
+                        </group>
+                        <group name="group_right">
+                            <field name="department"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+<!--Doctor Tree View-->
+    <record id="view_tree_doctor" model="ir.ui.view">
+        <field name="name">Doctor View Tree</field>
+        <field name="model">res.doctor</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name_provider"/>
+                <field name="department"/>
+            </tree>
+        </field>
+    </record>
+
+</odoo>

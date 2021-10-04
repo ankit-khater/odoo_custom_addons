@@ -1,0 +1,512 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!--    User wise bill report -->
+    <template id="bill_user_wise_report">
+        <xpath expr="." position="inside">
+            <script src="/web/static/lib/jquery/jquery.js"></script>
+        </xpath>
+        <t t-call="report.html_container">
+            <div>
+                <div id="printSec">
+                    <button type="button" class="btn btn-success btn-sm printDiv">Print</button>
+                    <button type="button" class="btn btn-info btn-sm _close">Close</button>
+                    <div class="header">
+                        <div class="row">
+                            <div class="col-xs-10 text-right">
+                                <img src='/custom_report/static/src/image/banner.jpg'/>
+                            </div>
+                        </div>
+                    </div>
+                    <style>
+                        table.kha1 {
+                        font-family:arial;
+                        background-color: #000000;
+                        border:1px solid;
+                        font-size: 14px;
+                        width: 100%;
+                        text-align: left;
+                        table-layout:fixed;
+                        }
+                        table.kha1 tbody td {
+                        color: #3D3D3D;
+                        padding: 4px;
+                        background-color: #FFF;
+                        vertical-align: top;
+                        word-wrap:break-word;
+                        }
+                        table.kha1 tbody tr td{
+                        border :1pt solid #000000;
+                        }
+                        table.kha1 tbody tr.odd td {
+                        background-color:#F0F0F6;
+                        }
+                    </style>
+
+                    <div class="oe_structure"/>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <center>
+                                <b>
+                                    <span>
+                                        <span style="font-size:20px; font-weight:bold">
+                                            User Wise Daily Bill Collection Report
+                                        </span>
+                                    </span>
+                                </b>
+                                <br/>
+
+                            </center>
+                        </div>
+                        <div class="col-xs-12">
+                            <center>
+                                <p>
+                                    Date from :
+                                    <span t-esc="start_date"/>
+                                    , Date to :
+                                    <span t-esc="end_date"/>
+                                </p>
+                            </center>
+                        </div>
+
+                    </div>
+
+                    <table class="kha1 table table-condensed" style="border-collapse: collapse; ">
+                        <thead>
+                            <tr style="background:white">
+                                <th style="border: 1px solid black; width:10%">S/N</th>
+                                <th style="border: 1px solid black;text-align:center">User Name</th>
+                                <th style="border: 1px solid black;text-align:center">Free Patient</th>
+                                <th style="border: 1px solid black;text-align:center">Total Patient</th>
+                                <th style="border: 1px solid black;text-align:center">Total Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-set="total_sum" t-value="0"/>
+                            <tr t-foreach="data" t-as="order">
+                                <td style="border: 1px solid black;">
+                                    <span t-esc="order_index+1"/>
+                                </td>
+                                <td style="border: 1px solid black;">
+                                    <span t-esc="order['userName']"/>
+                                </td>
+                                <td style="border: 1px solid black;">
+                                    <span t-esc="order['freePatient']"/>
+                                </td>
+                                <td style="border: 1px solid black;">
+                                    <span t-esc="order['paidPatient']"/>
+                                </td>
+                                <td style="border: 1px solid black; text-align:center">
+                                    <span t-esc="order['totalCallection']"/>
+                                    <t t-set="total_sum" t-value="total_sum + order['totalCallection']"/>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td colspan="4" style="border: 1px solid black; text-align:right">
+                                    <b>Total Amount:</b>
+                                </td>
+                                <td style="border: 1px solid black; text-align:center">
+                                    <span t-esc="total_sum"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+                    <script>
+                        $(document).ready(function(){
+
+                        $(".printDiv").click(function() {
+                        $(".printDiv").css("display","none");
+                        $("._close").css("display","none");
+                        var printer = window.open('left=0', 'top=0', 'width=300,height=300');
+                        printer.document.open("text/html");
+                        printer.document.write(document.getElementById('printSec').innerHTML);
+                        printer.print();
+                        printer.document.close();
+                        printer.window.close();
+                        $(".printDiv").css("display","");
+                        $("._close").css("display","");
+                        });
+
+                        $("._close").click(function() {
+                        window.close();
+                        });
+
+                        });
+                    </script>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="bill_user_report_det__">
+        <t t-call="report.external_layout">
+            <div class=" ">
+                <div id="printSec">
+                    <button type="button" class="btn btn-success btn-sm printDiv">Print</button>
+                    <button type="button" class="btn btn-info btn-sm _close">Close</button>
+                    <style>
+                        table.kha1 {
+                        font-family:arial;
+                        background-color: #000000;
+                        border:1px solid;
+                        font-size: 14px;
+                        width: 100%;
+                        text-align: left;
+                        table-layout:fixed;
+                        }
+                        table.kha1 tbody td {
+                        color: #3D3D3D;
+                        padding: 4px;
+                        background-color: #FFF;
+                        vertical-align: top;
+                        word-wrap:break-word;
+                        }
+                        table.kha1 tbody tr td{
+                        border :1pt solid #000000;
+                        }
+                        table.kha1 tbody tr.odd td {
+                        background-color:#F0F0F6;
+                        }
+                    </style>
+                    <div class="oe_structure"/>
+                    <div class="row">
+                        <center>
+                            <b>
+                                <h4>Collection Report by Bill User Details</h4>
+                            </b>
+                        </center>
+                        <div class="col-xs-5">
+                            <p>
+                                Date from :
+                                <span t-esc="start_date"/>
+                                <br/>
+                                Date to :
+                                <span t-esc="end_date"/>
+                            </p>
+                        </div>
+                        <div class="col-xs-3"></div>
+                        <div class="col-xs-4">
+                            <p>
+                                Printing Date :
+                                <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d, %I:%M%p')"/>
+                                <br/>
+                                Printing By :
+                                <span t-esc="user.name"/>
+                            </p>
+                        </div>
+                    </div>
+                    <br/>
+                    <t t-foreach="data.keys()" t-as="user">
+                        <center>
+                            <b>
+                                <span>Bill User :</span>
+                                <span t-esc="user"/>
+                            </b>
+                        </center>
+                        <t t-set="total_sum" t-value="0"/>
+                        <table class="table table-condensed" style="border: 1px solid black;">
+                            <thead>
+                                <tr style="border: 1px solid black;">
+                                    <th style="border: 1px solid black;">S/N</th>
+                                    <th style="border: 1px solid black;">Date</th>
+                                    <th style="border: 1px solid black;">Invoice Number</th>
+                                    <th style="border: 1px solid black;">Source</th>
+                                    <th style="border: 1px solid black;">Product Name</th>
+                                    <th style="border: 1px solid black;">Patient Name</th>
+                                    <th style="border: 1px solid black;">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="data[user]" t-as="order">
+                                    <td style="border: 1px solid black;">
+                                        <span t-esc="order_index+1"/>
+                                    </td>
+                                    <td style="border: 1px solid black;">
+                                        <span t-esc="order[0]"/>
+                                    </td>
+                                    <td style="border: 1px solid black;">
+                                        <span t-esc="order[1]"/>
+                                    </td>
+                                    <td style="border: 1px solid black;">
+                                        <span t-esc="order[2]"/>
+                                    </td>
+                                    <td style="border: 1px solid black;">
+                                        <span t-foreach="order[3]" t-as="s">
+                                            <span t-esc="s"/>
+                                            <br/>
+                                        </span>
+                                    </td>
+                                    <td style="border: 1px solid black;">
+                                        <span t-esc="order[4]"/>
+                                    </td>
+                                    <td style="border: 1px solid black;">
+                                        <span t-esc="order[5]"/>
+                                        <t t-set="total_sum" t-value="total_sum + order[5]"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid black;">
+                                    </td>
+                                    <td style="border: 1px solid black;">
+                                    </td>
+                                    <td style="border: 1px solid black;">
+                                    </td>
+                                    <td style="border: 1px solid black;">
+                                    </td>
+                                    <td style="border: 1px solid black;">
+                                    </td>
+                                    <td style="border: 1px solid black;">
+                                        <b>Total Amount:</b>
+                                    </td>
+                                    <td style="border: 1px solid black;">
+                                        <span t-esc="total_sum"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </t>
+
+                    <script>
+                        $(document).ready(function(){
+
+                        $(".printDiv").click(function() {
+                        $(".printDiv").css("display","none");
+                        $("._close").css("display","none");
+                        var printer = window.open('left=0', 'top=0', 'width=300,height=300');
+                        printer.document.open("text/html");
+                        printer.document.write(document.getElementById('printSec').innerHTML);
+                        printer.print();
+                        printer.document.close();
+                        printer.window.close();
+                        $(".printDiv").css("display","");
+                        $("._close").css("display","");
+                        });
+
+                        $("._close").click(function() {
+                        window.close();
+                        });
+
+                        });
+
+
+                    </script>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="department_wise_report_not_use">
+        <xpath expr="." position="inside">
+            <script src="/web/static/lib/jquery/jquery.js"></script>
+        </xpath>
+        <t t-call="report.html_container">
+            <div>
+                <div id="printSec">
+                    <button type="button" class="btn btn-success btn-sm printDiv">Print</button>
+                    <button type="button" class="btn btn-info btn-sm _close">Close</button>
+                    <div class="header">
+                        <div class="row">
+                            <div class="col-xs-10 text-right">
+                                <img src='/report/static/src/image/hospital_logo.bmp'/>
+                            </div>
+                        </div>
+                    </div>
+                    <style>
+                        table.kha1 {
+                        font-family:arial;
+                        <!--                        background-color: #000000;-->
+                        border:1px solid;
+                        font-size: 14px;
+                        width: 100%;
+                        text-align: left;
+                        table-layout:fixed;
+                        }
+                        table.kha1 tbody td {
+                        color: #3D3D3D;
+                        padding: 4px;
+                        background-color: #FFF;
+                        vertical-align: top;
+                        word-wrap:break-word;
+                        }
+                        table.kha1 tbody tr td{
+                        border :1pt solid #000000;
+                        }
+                        table.kha1 tbody tr.odd td {
+                        background-color:#F0F0F6;
+                        }
+                    </style>
+
+                    <div class="oe_structure"/>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <center>
+                                <b>
+                                    <span>
+                                        <span style="font-size:20px; font-weight:bold">
+                                            Department Wise Bill Collection Report
+                                        </span>
+                                    </span>
+                                </b>
+                                <br/>
+
+                            </center>
+                        </div>
+                        <div class="col-xs-12">
+                            <center>
+                                <p>
+                                    Date from :
+                                    <span t-esc="start_date"/>
+                                    , Date to :
+                                    <span t-esc="end_date"/>
+                                </p>
+                                <p>
+                                    <strong>Bill User:
+                                        <span t-esc="us"/>
+                                    </strong>
+                                </p>
+                            </center>
+                        </div>
+                    </div>
+
+                    <center>
+                        <h3><t t-esc="categ_name"/><![CDATA[&nbsp;]]>[Collection]
+                        </h3>
+                    </center>
+                    <t t-set="s" t-value="0"></t>
+                    <center>
+                        <table class="kha1 table-condensed" style="border-collapse: collapse;align:center">
+                            <thead>
+                                <tr style="border: 1px solid black;">
+                                    <th style="border: 1px solid black;">S/N</th>
+                                    <th style="border: 1px solid black;">Name</th>
+                                    <th style="border: 1px solid black;">Quantity</th>
+                                    <th style="border: 1px solid black;">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="line" t-as="line">
+                                    <td style="border: 1px solid black;">
+                                        <span t-esc="line_index+1"/>
+                                    </td>
+                                    <td style="border: 1px solid black;">
+                                        <span t-esc="line['name']"/>
+                                    </td>
+                                    <td style="border: 1px solid black;">
+                                        <span t-esc="line['quantity']"/>
+                                    </td>
+                                    <td style="border: 1px solid black;">
+                                        <span t-esc="line['total']"/>
+                                        <t t-set="s" t-value="s+line['total']"></t>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid black;">
+                                    </td>
+                                    <td style="border: 1px solid black;">
+                                    </td>
+                                    <td style="border: 1px solid black;">
+                                        <b>Total Collection:</b>
+                                    </td>
+                                    <td style="border: 1px solid black;">
+                                        <b>
+                                            <span t-esc="s"/>
+                                        </b>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </center>
+                    <br/>
+<!--                    <center>-->
+<!--                        <h3><t t-esc="categ_name"/><![CDATA[&nbsp;]]>[Refund]-->
+<!--                        </h3>-->
+<!--                    </center>-->
+<!--                    <t t-set="r" t-value="0"></t>-->
+<!--                    <center>-->
+<!--                        <table class="kha1 table-condensed" style="border-collapse: collapse;align:center">-->
+<!--                            <thead>-->
+<!--                                <tr style="border: 1px solid black;">-->
+<!--                                    <th style="border: 1px solid black;">S/N</th>-->
+<!--                                    <th style="border: 1px solid black;">Name</th>-->
+<!--                                    <th style="border: 1px solid black;">Quantity</th>-->
+<!--                                    <th style="border: 1px solid black;">Amount</th>-->
+<!--                                </tr>-->
+<!--                            </thead>-->
+<!--                            <tbody>-->
+<!--                                <tr t-foreach="refund" t-as="line">-->
+<!--                                    <td style="border: 1px solid black;">-->
+<!--                                        <span t-esc="line_index+1"/>-->
+<!--                                    </td>-->
+<!--                                    <td style="border: 1px solid black;">-->
+<!--                                        <span t-esc="line['name']"/>-->
+<!--                                    </td>-->
+<!--                                    <td style="border: 1px solid black;">-->
+<!--                                        <span t-esc="line['quantity']"/>-->
+<!--                                    </td>-->
+<!--                                    <td style="border: 1px solid black;">-->
+<!--                                        <span t-esc="line['total']"/>-->
+<!--                                        <t t-set="r" t-value="r+line['total']"></t>-->
+<!--                                    </td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td style="border: 1px solid black;">-->
+<!--                                    </td>-->
+<!--                                    <td style="border: 1px solid black;">-->
+<!--                                    </td>-->
+<!--                                    <td style="border: 1px solid black;">-->
+<!--                                        <b>Total Refund:</b>-->
+<!--                                    </td>-->
+<!--                                    <td style="border: 1px solid black;">-->
+<!--                                        <b>-->
+<!--                                            <span t-esc="r"/>-->
+<!--                                        </b>-->
+<!--                                    </td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td style="border: 1px solid black;">-->
+<!--                                    </td>-->
+<!--                                    <td style="border: 1px solid black;">-->
+<!--                                    </td>-->
+<!--                                    <td style="border: 1px solid black;">-->
+<!--                                        <b>Net Collection:</b>-->
+<!--                                    </td>-->
+<!--                                    <td style="border: 1px solid black;">-->
+<!--                                        <t t-set="net_amount" t-value="s-r"></t>-->
+<!--                                        <b>-->
+<!--                                            <span t-esc="net_amount"/>-->
+<!--                                        </b>-->
+<!--                                    </td>-->
+<!--                                </tr>-->
+<!--                            </tbody>-->
+<!--                        </table>-->
+<!--                    </center>-->
+                    <script>
+                        $(document).ready(function(){
+
+                        $(".printDiv").click(function() {
+                        $(".printDiv").css("display","none");
+                        $("._close").css("display","none");
+                        var printer = window.open('left=0', 'top=0', 'width=300,height=300');
+                        printer.document.open("text/html");
+                        printer.document.write(document.getElementById('printSec').innerHTML);
+                        printer.print();
+                        printer.document.close();
+                        printer.window.close();
+                        $(".printDiv").css("display","");
+                        $("._close").css("display","");
+                        });
+
+                        $("._close").click(function() {
+                        window.close();
+                        });
+                        });
+                    </script>
+                </div>
+            </div>
+        </t>
+    </template>
+
+</odoo>

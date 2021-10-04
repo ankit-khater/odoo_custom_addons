@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_wizard_doctor_wise_patient" model="ir.ui.view">
+            <field name="name">doctor.wzd.form.view</field>
+            <field name="model">doctor.wise.patient</field>
+            <field name="arch" type="xml">
+                <form string="Doctor Wise Patient Report">
+                    <group>
+                        <group>
+                            <field name="start_date"/>
+                        </group>
+                        <group>
+                            <field name="end_date"/>
+                        </group>
+                    </group>
+<!--					<group>-->
+<!--                        <group>-->
+<!--                        <field name="categ_id" filter_domain="[('categ_id', 'child_of', self)]"/>-->
+<!--                            &lt;!&ndash; <field name="categ_id"/> &ndash;&gt;-->
+<!--                        </group>-->
+<!--                        <group>-->
+<!--                        <field name="doctor"/>-->
+<!--                        </group>-->
+<!--                    </group>-->
+                    <footer>
+                        <button name="doctor_wise_patient" string="Print Report" class="oe_highlight"
+                                type="object"/>
+                        Or
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_wizard_doctor_wise_patient_report" model="ir.actions.act_window">
+			<field name="name">Doctor Wise Patient Report</field>
+			<field name="res_model">doctor.wise.patient</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="view_wizard_doctor_wise_patient" />
+			<field name="target">new</field>
+		</record>
+
+        <menuitem id="menu_action_wizard_doctor_wise_patient_report"
+                  name="Doctor Wise Patient Report"
+                  action="action_wizard_doctor_wise_patient_report"
+                  parent="sales_team.menu_sale_report"
+                  sequence="8"/>
+    </data>
+</odoo>

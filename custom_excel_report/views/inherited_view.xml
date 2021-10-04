@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="inherit_sale_order_form" model="ir.ui.view">
+        <field name="name">inherit.trail.balance.wzd.form.view</field>
+        <field name="model">account.balance.report</field>
+        <field name="inherit_id" ref="account.account_report_balance_view"/>
+        <field name="arch" type="xml">
+            <footer>
+                <button name="print_excel_1" string="Print Excel" class="oe_highlight"
+                        type="object"/>
+            </footer>
+        </field>
+    </record>
+</odoo>

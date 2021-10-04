@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_wizard_bill_collection_report" model="ir.ui.view">
+        <field name="name">bill.collection.wzd.form.view</field>
+        <field name="model">bill.collection</field>
+        <field name="arch" type="xml">
+            <form string="Collection Report by Bill User">
+                <group>
+                    <group>
+                        <field name="start_date" />
+                        <field name="user_ids" widget="many2many_tags" />
+                    </group>
+                    <group>
+                        <field name="end_date" />
+<!--                        <field name="patient_ids" widget="many2one_tags" />-->
+                    </group>
+                </group>
+                <footer>
+                    <button name="print_test" string="Print" type="object" class="oe_highlight" />
+                    Or
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_wizard_bill_collection_report" model="ir.actions.act_window">
+        <field name="name">Detailed Collection Report by Salesperson</field>
+        <field name="res_model">bill.collection</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_wizard_bill_collection_report"/>
+        <field name="target">new</field>
+    </record>
+
+<!--    <menuitem id="menu_action_wizard_bill_collection_report "-->
+<!--                  name="Detailed Collection Report by Salesperson"-->
+<!--                  action="action_wizard_bill_collection_report"-->
+<!--                  parent="sales_team.menu_sale_report"-->
+<!--                  sequence="2"/>-->
+</odoo>

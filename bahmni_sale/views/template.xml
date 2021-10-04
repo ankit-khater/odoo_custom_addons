@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <template id="custom_page" name="page">
+            <html>
+                <head>
+                    <script type="text/javascript">
+
+                        function printPatientInvoice() {
+                        var printer = window.open('left=0', 'top=0', 'width=600,height=600');
+                        printer.document.open("text/html");
+                        printer.document.write(document.getElementById('print_div').innerHTML);
+                        printer.print();
+                        printer.document.close();
+                        printer.window.close();
+                        printer.close();
+                        window.close();
+                        }
+                        var msg = document.getElementById('theInput').innerHTML;
+                        console.log(msg);
+
+                    </script>
+                    <style>
+                        .
+                        {
+                        margin: auto;
+                        width: 60%;
+                        padding: 10px;
+                        }
+
+                        <!--                        table {-->
+                        <!--                        border-collapse: separate;-->
+                        <!--                        border-spacing: 50px 0;-->
+                        <!--                        }-->
+
+
+                    </style>
+                </head>
+                <body onload="printPatientInvoice()">
+                    <t t-foreach="data" t-as="o">
+                        <div class="container" id="print_div">
+
+                            <style>
+                                tr.border_bottom td {
+                                border-bottom: 1px solid black;
+                                }
+                                tr.border_top td {
+                                border-top: 1px solid black;
+                                }
+                                .mr{
+                                margin-top:0px
+                                }
+                            </style>
+                            <script>
+                                function test(){
+                                var value = document.getElementById("theInput").innerHTML;
+                                console.log(value);
+                                document.write("hlw");
+                                return value
+                                }
+                                test()
+                            </script>
+                            <div class="page">
+                                <div class="mr">
+                                    <div class="header">
+                                        <div class="row">
+                                            <div class="col-xs-10">
+                                                <img src='/bahmni_sale/static/src/image/banner.jpg'/>
+<!--                                                <center>-->
+<!--                                                    <h2 style=" margin-top:10px;"> <b> <t t-esc="o.company_id.name"/> </b> </h2>-->
+<!--                                                </center>-->
+<!--                                                <table>-->
+<!--                                                    <tr>-->
+<!--                                                        <td style="width:30%">-->
+<!--                                                            <img src='/web/binary/company_logo' class="float-right" style=" margin-top:0px;" alt="Logo"/>-->
+<!--                                                        </td>-->
+<!--                                                        <td style="width:70%;">-->
+<!--                                                             <h2 style=" margin-top:10px;"> <b> <t t-esc="o.company_id.name"/> </b> </h2>-->
+<!--                                                        </td>-->
+<!--                                                    </tr>-->
+<!--                                                </table>-->
+
+                                            </div>
+<!--                                             <img src='/web/binary/company_logo' class="float-right" style=" margin-top:0px;" alt="Logo"/>-->
+                                        </div>
+                                    </div>
+                                    <br/>
+                                    <br/>
+                                </div>
+
+                                <div class="center">
+
+                                    <table style="width:100%">
+                                        <tr>
+                                            <td style="font-weight:bold;font-size: 22px;">Invoice Number:</td>
+                                            <td style="font-size: 22px;">
+                                                <t t-esc="o.number"/>
+                                            </td>
+                                            <td style="font-weight:bold;font-size: 22px;">Date and Time:</td>
+                                            <td style="font-size: 22px;">
+                                                <span t-field="o.create_date"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-weight:bold;font-size: 22px;">Patient ID:</td>
+                                            <td style="font-size: 22px;">
+                                                <t t-esc="o.partner_id.ref"/>
+                                            </td>
+                                            <td style="font-weight:bold;font-size: 22px;">Patient Name:</td>
+                                            <td style="font-size: 22px;">
+                                                <t t-esc="o.partner_id.name"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-weight:bold;font-size: 22px;">Gender:</td>
+                                            <td style="font-size: 22px;">
+                                                <!--                                                <t t-esc="o.x_partner_gender"/>-->
+                                            </td>
+                                            <td style="font-weight:bold;font-size: 22px;">Age:</td>
+                                            <td style="font-size: 22px;">
+                                                <!--                                                <t t-esc="o.x_partner_age"/>-->
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <br/>
+                                    <br/>
+                                    <div>
+                                        <table style="width:100%; font-size: 22px;">
+                                            <tr class="border_bottom" style="font-weight:bold">
+                                                <td>S/N</td>
+                                                <td align="left">Services</td>
+                                                <td>Quantity</td>
+                                                <td>Unit Price</td>
+                                                <td>Amount</td>
+                                            </tr>
+                                            <t t-set="total_sum" t-value="0"/>
+                                            <tbody class="invoice_tbody">
+                                                <tr t-foreach="invoiceLines" t-as="l">
+                                                    <td>
+                                                        <span t-esc="l_index+1"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-field="l.name"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-field="l.quantity"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-field="l.price_unit"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="'%.2f'%(l.price_unit*l.quantity)"/>
+                                                        <t t-set="total_sum"
+                                                           t-value="total_sum + (l.price_unit*l.quantity)"/>
+                                                    </td>
+                                                </tr>
+                                                <tr class="border_top">
+                                                    <td colspan="4">Total:</td>
+                                                    <td>
+                                                        <t t-esc="'%.2f'%(total_sum)"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="right" style="font-weight:bold; font-size:20px;" colspan="4">Free:</td>
+                                                    <td style="font-size: 22px;">
+                                                        <t t-esc="o.discount"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="right" style="font-weight:bold;font-size:20px" colspan="4">Paid Amount:</td>
+                                                    <td style="font-size: 22px;">
+                                                        <t t-esc="o.amount_total - o.residual"/>
+                                                        <t t-set="paid" t-value="o.amount_total - o.residual"></t>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="right" style="font-weight:bold;font-size:20px" colspan="4">Due Amount:</td>
+                                                    <td style="font-size: 22px;">
+                                                        <t t-esc="o.residual"/>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                        <br/>
+                                        <br/>
+                                        <div>
+                                            <p style="text-align:right;">
+                                                <sapn style="border-bottom:1px solid black">
+                                                    <t t-esc="o.write_uid.name"/>
+                                                </sapn>
+                                            </p>
+                                            <p style="text-align:right;font-size: 22px;">Billing Clerk</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                    <xpath expr="." position="inside">
+                        <link rel="import" href="//bahmni_sale/views/sale_order_views.xml"/>
+                    </xpath>
+                </body>
+            </html>
+
+        </template>
+    </data>
+</odoo>

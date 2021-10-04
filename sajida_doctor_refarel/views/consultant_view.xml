@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<odoo>
+<!--Consultant Form View -->
+     <record id="view_form_consultant" model="ir.ui.view">
+        <field name="name">Consultant View</field>
+        <field name="model">res.consultant</field>
+        <field name="arch" type="xml">
+            <form string="Consultant View">
+                <sheet>
+                    <group name="group_top">
+                        <group name="group_left">
+                            <field name="name_provider"/>
+                        </group>
+                        <group name="group_right">
+                            <field name="department"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+<!--Consultant Tree View-->
+    <record id="view_tree_consultant" model="ir.ui.view">
+        <field name="name">Consultant View Tree</field>
+        <field name="model">res.consultant</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name_provider"/>
+                <field name="department"/>
+            </tree>
+        </field>
+    </record>
+
+</odoo>
